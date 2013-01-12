@@ -422,7 +422,6 @@ if  [ "`grep -e "${bla_res2}" atlas.txt | head -n2 | wc -l `" == "2" ] ; then #w
 			cat ./foo/atlas1.txt | sed -e 's/atlas1_1/atlas1/' > ./final.txt
 			cat text >> final.txt
 			cat final.txt |  sed -e 's/\.\///' > atlas.txt
-			#mv -f final.txt atlas.txt
 			rm text atlas_bkp.txt final.txt
 		fi
 	done
