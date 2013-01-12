@@ -1,8 +1,5 @@
 #!/bin/bash
 
-
-#todo: find forumlar putting out a good  global eff  /  atlas amount   ratio
-
 if [ -f GLOBAL_LOG ] ; then
 	rm GLOBAL_LOG
 fi
@@ -407,7 +404,6 @@ if  [ "`grep -e "${bla_res2}" atlas.txt | head -n2 | wc -l `" == "2" ] ; then #w
 	echo "${bla_res_good} is good"
 
 	for i in {1..4} ; do
-	echo $i
 		bla_foo_numb=`find | grep "atlas${i}_.*\.png" | wc -l`
 		if [[ "${bla_foo_numb}" == "1" ]] ; then
 			cd ../  # edit atlas.txt
@@ -428,10 +424,7 @@ if  [ "`grep -e "${bla_res2}" atlas.txt | head -n2 | wc -l `" == "2" ] ; then #w
 			cat final.txt |  sed -e 's/\.\///' > atlas.txt
 			#mv -f final.txt atlas.txt
 			rm text atlas_bkp.txt final.txt
-			echo "works maybe"
 		fi
 	done
-
-pwd
 fi
 rm -rf ./foo
