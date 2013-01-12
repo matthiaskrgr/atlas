@@ -1,5 +1,12 @@
 #!/bin/bash
 
+make_atlas_check=`whereis make_atlas | wc -w`
+
+if [ "${make_atlas_check}" == "1" ]; then
+	echo "ERROR: make_atlas cannot be found."
+	exit 1
+fi
+
 if [ -f GLOBAL_LOG ] ; then
 	rm GLOBAL_LOG
 fi
