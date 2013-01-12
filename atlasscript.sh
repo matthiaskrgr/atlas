@@ -409,7 +409,6 @@ if  [ "`grep -e "${bla_res2}" atlas.txt | head -n2 | wc -l `" == "2" ] ; then #w
 			cd ../  # edit atlas.txt
 			cat atlas.txt | awk /\*\ atlas3/,/^$/ > atlas_bkp.txt
 			rm atlas1.png atlas2.png
-			# also rename the atlas entry numbers!!
 			cd ./foo
 			cp atlas${i}_1.png ../atlas1.png
 			cd ../
