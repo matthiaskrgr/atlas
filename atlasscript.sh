@@ -326,11 +326,11 @@ echo $efficiency_final_sum_sum_sum
 
 
 echo -e "${TEAL}-------------------------------------------------------------------------------------${NC}"
-echo "Final atlas: part 1"
+echo "Composed atlas: part 1"
 echo $firststats $efficiency_final_sum_sum_sum | awk '{print $1" "$2" "$5" "$6" "$9" "$10" "$11}'
 #echo  $firststats $efficiency_final_sum_sum_sum
 
-echo "Final atlas: part 2"
+echo "Composed atlas: part 2"
 echo $secondstats $efficiency_final_sum_sum_sum | awk '{print $1" "$2" "$5" "$6" "$9" "$10" "$12}'
 echo -e "${TEAL}----------------------------------------${NC}"
 
