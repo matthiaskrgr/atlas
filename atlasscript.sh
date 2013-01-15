@@ -360,21 +360,17 @@ fi
 echo -e "${YELLOW}---------------------------------------------${NC}"
 echo -e "${YELLOW}---------------------------------------------${NC}"
 
-
+echo "Checking if we can do further optimizations..."
 
 rm -r /tmp/atlasscript
 
-#exit
-
-
 bla_res=`head -n1 atlas.txt | awk '{print $4" "$5}'`
-
 
 bla_res2=`echo "$bla_res" | sed -e 's/\ /\\ /'`
 
 
-if  [ "`grep -e "${bla_res2}" atlas.txt | head -n2 | wc -l `" == "2" ] ; then #we can do further optimizsations
-
+if  [ "`grep -e "${bla_res2}" atlas.txt | head -n2 | wc -l `" == "2" ] ; then
+	echo "Yes"
 	bla_images=`cat atlas.txt | awk /\*.*1\.png/,/\*.*3\.png/ | grep -v "^\*" | awk '{print $1}'` # images of the first 2 atlases
 
 
@@ -452,4 +448,5 @@ if  [ "`grep -e "${bla_res2}" atlas.txt | head -n2 | wc -l `" == "2" ] ; then #w
 		fi
 	done
 fi
+echo "No."
 rm -rf ./foo
