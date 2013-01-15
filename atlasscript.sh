@@ -427,19 +427,11 @@ if  [ "`grep -e "${further_optim_res_regex}" atlas.txt | head -n2 | wc -l `" == 
 
 
 
-	foo_atlas1_numb=`find | grep "atlas1.*" | wc -l`
-	foo_atlas2_numb=`find | grep "atlas2.*" | wc -l`
-
-	if [[ "${foo_atlas1_numb}" < "${foo_atlas2_numb}" ]] ; then # atlas 1 is better
-		further_optim_res_good=${further_optim_res}
-	else
-		further_optim_res_good=${further_optim_res_second}
-	fi
-	echo "${further_optim_res_good} is good"
-
 	for i in {1..4} ; do
-		bla_foo_numb=`find | grep "atlas${i}_.*\.png" | wc -l`
-		if [[ "${bla_foo_numb}" == "1" ]] ; then
+		FO_atlasNR_amount=`find | grep "atlas${i}_.*\.png" | wc -l`
+		dir=`pwd`
+		if [[ "${FO_atlasNR_amount}" == "1" ]] ; then
+			cd $dir
 			cd ../  # edit atlas.txt
 			cat atlas.txt | awk /\*\ atlas3/,/^$/ > atlas_bkp.txt
 			rm atlas1.png atlas2.png
@@ -456,6 +448,7 @@ if  [ "`grep -e "${further_optim_res_regex}" atlas.txt | head -n2 | wc -l `" == 
 			cat text >> final.txt
 			cat final.txt |  sed -e 's/\.\///' > atlas.txt
 			rm text atlas_bkp.txt final.txt
+			break
 		fi
 	done
 else
