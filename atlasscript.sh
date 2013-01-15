@@ -448,6 +448,7 @@ if  [ "`grep -e "${further_optim_res_regex}" atlas.txt | head -n2 | wc -l `" == 
 			cat text >> final.txt
 			cat final.txt |  sed -e 's/\.\///' > atlas.txt
 			rm text atlas_bkp.txt final.txt
+			echo "2 atlas files have been succsessfully merged into one."
 			break
 		fi
 	done
