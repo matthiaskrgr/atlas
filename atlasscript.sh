@@ -396,8 +396,10 @@ if  [ "`grep -e "${further_optim_res_regex}" atlas.txt | head -n2 | wc -l `" == 
 
 	further_optim_res_final2=`echo "${further_optim_res_fixedx} ${further_optim_res_y}"`
 
+#echo $further_optim_res_final1
+#echo $further_optim_res_final2
 
-#	echo "copying files"
+	printf "\nCreating new workdir..."
 
 	mkdir foo #copy the images
 	cp ${further_optim_images} ./foo/
@@ -405,17 +407,24 @@ if  [ "`grep -e "${further_optim_res_regex}" atlas.txt | head -n2 | wc -l `" == 
 	cp ${bla_offset} ./foo/
 	cd foo
 
+	printf " done\n\n"
+
+	echo -e "\nCreating atlas ${further_optim_res_final1}"
 	make_atlas atlas1_ ${further_optim_res_final1} atlas1.txt ${further_optim_images}
-	further_optim_res_second=`echo "$further_optim_res" | awk '{print $2" "$1}'`
+	further_optim_res_final1_2=`echo "$further_optim_res" | awk '{print $2" "$1}'`
 
-	make_atlas atlas2_ ${further_optim_res_second} atlas2.txt ${further_optim_images}
+	echo -e "\nCreating atlas ${further_optim_res_final1_2}"
+	make_atlas atlas2_ ${further_optim_res_final1_2} atlas2.txt ${further_optim_images}
 
 
-
+	echo -e "\nCreating atlas ${further_optim_res_final2}"
 	make_atlas atlas3_ ${further_optim_res_final2} atlas3.txt ${further_optim_images}
-	further_optim_res_second2=`echo "$further_optim_res" | awk '{print $2" "$1}'`
+	further_optim_res_final2_2=`echo "$further_optim_res" | awk '{print $2" "$1}'`
 
-	make_atlas atlas4_ ${further_optim_res_second2} atlas4.txt ${further_optim_images}
+	echo -e "\nCreating atlas ${further_optim_res_final2_2}"
+	make_atlas atlas4_ ${further_optim_res_final2_2} atlas4.txt ${further_optim_images}
+
+
 
 
 	foo_atlas1_numb=`find | grep "atlas1.*" | wc -l`
