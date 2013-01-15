@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#    atlas script - tries to bruteforce good atlas resolutions
+#    atlas script - tries to bruteforce good texture atlas resolutions
 #    Copyright (C) 2013  Matthias Krüger
 
 #    This program is free software; you can redistribute it and/or modify
