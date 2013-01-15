@@ -364,67 +364,67 @@ echo "Checking if we can do further optimizations..."
 
 rm -r /tmp/atlasscript
 
-bla_res=`head -n1 atlas.txt | awk '{print $4" "$5}'`
+further_optim_res=`head -n1 atlas.txt | awk '{print $4" "$5}'`
 
-bla_res2=`echo "$bla_res" | sed -e 's/\ /\\ /'`
+further_optim_res_regex=`echo "$further_optim_res" | sed -e 's/\ /\\ /'`
 
 
-if  [ "`grep -e "${bla_res2}" atlas.txt | head -n2 | wc -l `" == "2" ] ; then
+if  [ "`grep -e "${further_optim_res_regex}" atlas.txt | head -n2 | wc -l `" == "2" ] ; then
 	echo "Yes"
-	bla_images=`cat atlas.txt | awk /\*.*1\.png/,/\*.*3\.png/ | grep -v "^\*" | awk '{print $1}'` # images of the first 2 atlases
+	further_optim_images=`cat atlas.txt | awk /\*.*1\.png/,/\*.*3\.png/ | grep -v "^\*" | awk '{print $1}'` # images of the first 2 atlases
 
 
-	bla_x_x2=`echo ${bla_res} | awk '{print $1}'`
-	bla_res_fixedx=`calc -p 2\*${bla_x_x2}`
+	bla_x_x2=`echo ${further_optim_res} | awk '{print $1}'`
+	further_optim_res_fixedx=`calc -p 2\*${bla_x_x2}`
 
-	if [[ "${bla_res_fixedx}" == "4096" ]] ; then
-		bla_res_fixedx="2048"
+	if [[ "${further_optim_res_fixedx}" == "4096" ]] ; then
+		further_optim_res_fixedx="2048"
 	fi
 
 
-	bla_y_y2=`echo ${bla_res} | awk '{print $2}'`
-	bla_res_fixedy=`calc -p 2\*${bla_y_y2}`
+	bla_y_y2=`echo ${further_optim_res} | awk '{print $2}'`
+	further_optim_res_fixedy=`calc -p 2\*${bla_y_y2}`
 
-	if [[ "${bla_res_fixedy}" == "4096" ]] ; then
-		bla_res_fixedy="2048"
+	if [[ "${further_optim_res_fixedy}" == "4096" ]] ; then
+		further_optim_res_fixedy="2048"
 	fi
 
 
-	bla_res_final1=`echo "${bla_x_x2} ${bla_res_fixedy}"`
+	further_optim_res_final1=`echo "${bla_x_x2} ${further_optim_res_fixedy}"`
 
-	bla_res_final2=`echo "${bla_res_fixedx} ${bla_y_y2}"`
+	further_optim_res_final2=`echo "${further_optim_res_fixedx} ${bla_y_y2}"`
 
 
 	echo "copying files"
 
 	mkdir foo #copy the images
-	cp ${bla_images} ./foo/
-	bla_offset=`echo ${bla_images} | sed s/\.png/\.offset/g`
+	cp ${further_optim_images} ./foo/
+	bla_offset=`echo ${further_optim_images} | sed s/\.png/\.offset/g`
 	cp ${bla_offset} ./foo/
 	cd foo
 
-	make_atlas atlas1_ ${bla_res_final1} atlas1.txt ${bla_images}
-	bla_res_second=`echo "$bla_res" | awk '{print $2" "$1}'`
+	make_atlas atlas1_ ${further_optim_res_final1} atlas1.txt ${further_optim_images}
+	further_optim_res_second=`echo "$further_optim_res" | awk '{print $2" "$1}'`
 
-	make_atlas atlas2_ ${bla_res_second} atlas2.txt ${bla_images}
+	make_atlas atlas2_ ${further_optim_res_second} atlas2.txt ${further_optim_images}
 
 
 
-	make_atlas atlas3_ ${bla_res_final2} atlas3.txt ${bla_images}
-	bla_res_second2=`echo "$bla_res" | awk '{print $2" "$1}'`
+	make_atlas atlas3_ ${further_optim_res_final2} atlas3.txt ${further_optim_images}
+	further_optim_res_second2=`echo "$further_optim_res" | awk '{print $2" "$1}'`
 
-	make_atlas atlas4_ ${bla_res_second2} atlas4.txt ${bla_images}
+	make_atlas atlas4_ ${further_optim_res_second2} atlas4.txt ${further_optim_images}
 
 
 	foo_atlas1_numb=`find | grep "atlas1.*" | wc -l`
 	foo_atlas2_numb=`find | grep "atlas2.*" | wc -l`
 
 	if [[ "${foo_atlas1_numb}" < "${foo_atlas2_numb}" ]] ; then # atlas 1 is better
-		bla_res_good=${bla_res}
+		further_optim_res_good=${further_optim_res}
 	else
-		bla_res_good=${bla_res_second}
+		further_optim_res_good=${further_optim_res_second}
 	fi
-	echo "${bla_res_good} is good"
+	echo "${further_optim_res_good} is good"
 
 	for i in {1..4} ; do
 		bla_foo_numb=`find | grep "atlas${i}_.*\.png" | wc -l`
