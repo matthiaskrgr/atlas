@@ -335,7 +335,7 @@ echo $secondstats $efficiency_final_sum_sum_sum | awk '{print $1" "$2" "$5" "$6"
 echo -e "${TEAL}----------------------------------------${NC}"
 
 
-echo "Best result of normal atlas generation:"
+echo "Best result of classic atlas generation:"
 bestnormalatlas=`cat /tmp/atlasscript/GLOBAL_LOG | grep -e ",\ 2\ atlas" -e ",\ 1\ atlas" -e ",\ 3\ atlas" -e ",\ 4\ atlas"| awk '{print $3" "$4", "$7" "$8" "$11}' | sort -n -k5 | tail -1`
 bestnormalatlas2=`echo "$bestnormalatlas" | awk '{print $3" "$4}'`
 bestnormalatlas_final=`cat /tmp/atlasscript/GLOBAL_LOG | grep "${bestnormalatlas2}"`
@@ -348,13 +348,13 @@ echo -e "${TEAL}----------------------------------------${NC}"
 
 if [[ "${bestnormalatlas_global_eff}" > "${efficiency_final_sum_sum_sum}" ]] ; then # composed atlas is best
 
-	echo "classic atlas is best"
+	echo "Classic atlas is best"
 	rm atlas_1.png atlas_2.png atlas.txt
 	make_atlas atlas ${bestnormalatas_res} atlas.txt ${inputfiles2}
 #echo "	make_atlas atlas ${bestnormalatas_res} atlas ${inputfiles2}"
 
 else
-	echo "composed atlas is best"
+	echo "Composed atlas is best"
 fi
 
 
