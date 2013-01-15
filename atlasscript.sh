@@ -447,6 +447,7 @@ if  [ "`grep -e "${further_optim_res_regex}" atlas.txt | head -n2 | wc -l `" == 
 			rm text atlas_bkp.txt final.txt
 		fi
 	done
+else
+	echo "No."
 fi
-echo "No."
 rm -rf ./foo
