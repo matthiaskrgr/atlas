@@ -370,32 +370,34 @@ further_optim_res_regex=`echo "$further_optim_res" | sed -e 's/\ /\\ /'`
 
 
 if  [ "`grep -e "${further_optim_res_regex}" atlas.txt | head -n2 | wc -l `" == "2" ] ; then
+# yes, we can probably merge 2 64x32 into one 128 x 32 or 64 x 64 atlas
 	echo "Yes"
 	further_optim_images=`cat atlas.txt | awk /\*.*1\.png/,/\*.*3\.png/ | grep -v "^\*" | awk '{print $1}'` # images of the first 2 atlases
 
 
-	bla_x_x2=`echo ${further_optim_res} | awk '{print $1}'`
-	further_optim_res_fixedx=`calc -p 2\*${bla_x_x2}`
+# X
+	further_optim_res_x=`echo ${further_optim_res} | awk '{print $1}'`
+	further_optim_res_fixedx=`calc -p 2\*${further_optim_res_x}`
 
-	if [[ "${further_optim_res_fixedx}" == "4096" ]] ; then
+	if [[ "${further_optim_res_fixedx}" == "4096" ]] ; then # we cannot have sizes above 2048, so limit here
 		further_optim_res_fixedx="2048"
 	fi
 
+# Y
+	further_optim_res_y=`echo ${further_optim_res} | awk '{print $2}'`
+	further_optim_res_fixedy=`calc -p 2\*${further_optim_res_y}`
 
-	bla_y_y2=`echo ${further_optim_res} | awk '{print $2}'`
-	further_optim_res_fixedy=`calc -p 2\*${bla_y_y2}`
-
-	if [[ "${further_optim_res_fixedy}" == "4096" ]] ; then
+	if [[ "${further_optim_res_fixedy}" == "4096" ]] ; then # same here
 		further_optim_res_fixedy="2048"
 	fi
 
 
-	further_optim_res_final1=`echo "${bla_x_x2} ${further_optim_res_fixedy}"`
+	further_optim_res_final1=`echo "${further_optim_res_x} ${further_optim_res_fixedy}"`
 
-	further_optim_res_final2=`echo "${further_optim_res_fixedx} ${bla_y_y2}"`
+	further_optim_res_final2=`echo "${further_optim_res_fixedx} ${further_optim_res_y}"`
 
 
-	echo "copying files"
+#	echo "copying files"
 
 	mkdir foo #copy the images
 	cp ${further_optim_images} ./foo/
