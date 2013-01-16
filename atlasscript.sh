@@ -450,8 +450,13 @@ if  [ "`grep -e "${further_optim_res_regex}" atlas.txt | head -n2 | wc -l `" == 
 			rm text atlas_bkp.txt final.txt
 			echo "2 atlas files have been succsessfully merged into one."
 			break
+		else
+			optimization="fail"
 		fi
 	done
+	if [ "${optimization}" == "fail" ] ; then
+		echo "Further optimization failed"
+	fi
 else
 	echo "No."
 fi
