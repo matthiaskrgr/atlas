@@ -463,8 +463,12 @@ else
 fi
 
 if [ "${classicbest}" = true ] ; then
-	cd ../
-	rm -r ./foo
+	if [ -d ./foo/ ] ; then
+		rm -r ./foo
+	else
+		cd ../
+		rm -r ./foo
+	fi
 else
 	rm -r ./foo
 fi
