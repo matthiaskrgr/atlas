@@ -352,6 +352,7 @@ if [[ "${bestnormalatlas_global_eff}" > "${efficiency_final_sum_sum_sum}" ]] ; t
 	rm atlas_1.png atlas_2.png atlas.txt
 	make_atlas atlas ${bestnormalatas_res} atlas.txt ${inputfiles2}
 #echo "	make_atlas atlas ${bestnormalatas_res} atlas ${inputfiles2}"
+	classicbest="true"
 
 else
 	echo "Composed atlas is best"
@@ -460,4 +461,10 @@ if  [ "`grep -e "${further_optim_res_regex}" atlas.txt | head -n2 | wc -l `" == 
 else
 	echo "No."
 fi
-rm -rf ./foo
+
+if [ "${classicbest}" = true ] ; then
+	cd ../
+	rm -r ./foo
+else
+	rm -r ./foo
+fi
