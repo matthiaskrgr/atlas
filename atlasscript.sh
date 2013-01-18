@@ -25,6 +25,9 @@ if [ "${make_atlas_check}" == "1" ]; then
 	exit 1
 fi
 
+name=`pwd | sed -e 's/\//\ /g' -e 's/.* //'` # name of our last dir
+
+
 if [ -f GLOBAL_LOG ] ; then
 	rm GLOBAL_LOG
 fi
@@ -472,3 +475,11 @@ if [ "${classicbest}" = true ] ; then
 else
 	rm -r ./foo
 fi
+
+# fix atlas names
+
+for i in {1..4} ; do
+	mv atlas${i}.png ${name}_${i}.png >& /dev/null
+done
+cat atlas.txt | sed -e s/\ atlas/\ "$name"_/ > atlas_.txt
+mv atlas_.txt atlas.txt
